@@ -23,11 +23,8 @@ cd stoikTest
 chmod +x setup.sh
 ./setup.sh
 
-# 3. Démarrer l'application (avec base de données)
-npm run setup
-
-# OU démarrer juste les apps (si DB déjà lancée)
-npm start:backend && npm start:frontend
+# 3. Démarrer juste les apps (si DB déjà lancée)
+npm run db:up && npm start:backend && npm start:frontend
 ```
 
 #### Option 2 : Setup manuel

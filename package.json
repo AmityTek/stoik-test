@@ -6,7 +6,6 @@
     "install": "npm run install:backend && npm run install:frontend",
     "install:backend": "cd backend && npm install",
     "install:frontend": "cd frontend && npm install",
-    "setup": "npm run db:up && npm run start",
     "start:backend": "cd backend && npm run start:dev",
     "start:frontend": "cd frontend && npm run dev",
     "db:up": "docker-compose up -d",
