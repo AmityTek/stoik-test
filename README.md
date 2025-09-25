@@ -2,6 +2,8 @@
 
 Un service de raccourcissement d'URL moderne développé avec React/TypeScript (frontend) et NestJS/TypeScript (backend) utilisant Clean Architecture avec PostgreSQL.
 
+<img width="774" height="550" alt="image" src="https://github.com/user-attachments/assets/b8f92f5b-a8fe-48a1-b0a8-f6a2a810e3e2" />
+
 ## 🚀 Démarrage rapide
 
 ### Prérequis
