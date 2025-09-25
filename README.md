@@ -27,30 +27,6 @@ chmod +x setup.sh
 npm run db:up && npm start:backend && npm start:frontend
 ```
 
-#### Option 2 : Setup manuel
-
-```bash
-# 1. Cloner le projet
-git clone <url-du-repo>
-cd stoikTest
-
-# 2. Installer les dépendances
-npm install
-
-# 3. Configurer la base de données
-npm run db:up
-cd backend && npm run db:generate && npm run db:push && cd ..
-
-# 4. Démarrer l'application (avec base de données)
-npm run setup
-```
-
-L'application sera accessible sur :
-
-- **Frontend** : http://localhost:5173
-- **Backend API** : http://localhost:3000
-- **Base de données** : PostgreSQL sur le port 5432
-
 ## 📁 Structure du projet
 
 ```
@@ -65,7 +41,6 @@ stoikTest/
 │   │   │   ├── config/     # Configuration & validation
 │   │   │   ├── database/   # Prisma & Database health
 │   │   │   └── health/     # Health checks
-│   │   ├── common/         # Types partagés
 │   │   └── main.ts         # Bootstrap NestJS
 │   ├── prisma/             # Schéma de base de données
 │   └── test/               # Tests d'intégration
@@ -203,9 +178,6 @@ Health check de l'application et de la base de données
 ```bash
 # Lancer les tests backend
 cd backend && npm test
-
-# Lancer les tests en mode watch
-cd backend && npm run test:watch
 ```
 
 Tests implémentés :
