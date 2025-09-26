@@ -14,7 +14,6 @@ export class CreateShortUrlUseCase {
   ) {}
 
   async execute(dto: CreateUrlDto, baseUrl: string): Promise<UrlResponseDto> {
-    // Vérifier si l'URL existe déjà et est encore active
     const existingUrl = await this.urlRepository.findByOriginalUrl(
       dto.originalUrl,
     );
@@ -22,17 +21,15 @@ export class CreateShortUrlUseCase {
       return this.toDto(existingUrl, baseUrl);
     }
 
-    // Valider la date d'expiration
     if (dto.expiresAt && dto.expiresAt <= new Date()) {
       throw new BadRequestException(
         "La date d'expiration doit être dans le futur",
       );
     }
 
-    // Créer une nouvelle URL
     const slug = this.slugService.generate();
     const url = new Url(
-      nanoid(), // ID unique
+      nanoid(),
       slug,
       dto.originalUrl,
       new Date(),
