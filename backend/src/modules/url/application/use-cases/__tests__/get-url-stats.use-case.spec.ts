@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { GetUrlStatsUseCase } from '../get-url-stats.use-case';
-import { UrlRepository } from '../../../domain/repositories/url.repository.abstract';
+import { UrlRepository } from '../../../domain/repositories/url.repository.interface';
 import { Url } from '../../../domain/entities/url.entity';
 
 describe('GetUrlStatsUseCase', () => {
@@ -19,12 +19,12 @@ describe('GetUrlStatsUseCase', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         GetUrlStatsUseCase,
-        { provide: UrlRepository, useValue: mockUrlRepository },
+        { provide: 'UrlRepository', useValue: mockUrlRepository },
       ],
     }).compile();
 
     useCase = module.get<GetUrlStatsUseCase>(GetUrlStatsUseCase);
-    urlRepository = module.get(UrlRepository);
+    urlRepository = module.get('UrlRepository');
   });
 
   it('should return URL stats for valid slug', async () => {

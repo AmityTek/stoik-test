@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { RedirectUrlUseCase } from '../redirect-url.use-case';
-import { UrlRepository } from '../../../domain/repositories/url.repository.abstract';
+import { UrlRepository } from '../../../domain/repositories/url.repository.interface';
 import { Url } from '../../../domain/entities/url.entity';
 
 describe('RedirectUrlUseCase', () => {
@@ -19,12 +19,12 @@ describe('RedirectUrlUseCase', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         RedirectUrlUseCase,
-        { provide: UrlRepository, useValue: mockUrlRepository },
+        { provide: 'UrlRepository', useValue: mockUrlRepository },
       ],
     }).compile();
 
     useCase = module.get<RedirectUrlUseCase>(RedirectUrlUseCase);
-    urlRepository = module.get(UrlRepository);
+    urlRepository = module.get('UrlRepository');
   });
 
   it('should return original URL for valid slug', async () => {

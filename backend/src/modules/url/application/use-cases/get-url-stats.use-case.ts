@@ -1,11 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { UrlRepository } from '../../domain/repositories/url.repository.abstract';
+import { Injectable, NotFoundException, Inject } from '@nestjs/common';
+import type { UrlRepository } from '../../domain/repositories/url.repository.interface';
 import { UrlStatsDto } from '../dtos/url-response.dto';
 import { Url } from '../../domain/entities/url.entity';
 
 @Injectable()
 export class GetUrlStatsUseCase {
-  constructor(private readonly urlRepository: UrlRepository) {}
+  constructor(
+    @Inject('UrlRepository') private readonly urlRepository: UrlRepository,
+  ) {}
 
   async execute(slug: string): Promise<UrlStatsDto> {
     const url = await this.urlRepository.findBySlug(slug);

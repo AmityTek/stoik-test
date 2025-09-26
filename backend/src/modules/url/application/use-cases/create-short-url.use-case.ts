@@ -1,7 +1,7 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, Inject } from '@nestjs/common';
 import { Url } from '../../domain/entities/url.entity';
-import { UrlRepository } from '../../domain/repositories/url.repository.abstract';
-import { SlugService } from '../../domain/services/slug.service.abstract';
+import type { UrlRepository } from '../../domain/repositories/url.repository.interface';
+import type { SlugService } from '../../domain/services/slug.service.interface';
 import { CreateUrlDto } from '../dtos/create-url.dto';
 import { UrlResponseDto } from '../dtos/url-response.dto';
 import { nanoid } from 'nanoid';
@@ -9,8 +9,8 @@ import { nanoid } from 'nanoid';
 @Injectable()
 export class CreateShortUrlUseCase {
   constructor(
-    private readonly urlRepository: UrlRepository,
-    private readonly slugService: SlugService,
+    @Inject('UrlRepository') private readonly urlRepository: UrlRepository,
+    @Inject('SlugService') private readonly slugService: SlugService,
   ) {}
 
   async execute(dto: CreateUrlDto, baseUrl: string): Promise<UrlResponseDto> {

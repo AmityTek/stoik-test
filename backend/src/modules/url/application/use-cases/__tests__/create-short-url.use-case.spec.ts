@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BadRequestException } from '@nestjs/common';
 import { CreateShortUrlUseCase } from '../create-short-url.use-case';
-import { UrlRepository } from '../../../domain/repositories/url.repository.abstract';
-import { SlugService } from '../../../domain/services/slug.service.abstract';
+import { UrlRepository } from '../../../domain/repositories/url.repository.interface';
+import { SlugService } from '../../../domain/services/slug.service.interface';
 import { Url } from '../../../domain/entities/url.entity';
 
 describe('CreateShortUrlUseCase', () => {
@@ -25,14 +25,14 @@ describe('CreateShortUrlUseCase', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CreateShortUrlUseCase,
-        { provide: UrlRepository, useValue: mockUrlRepository },
-        { provide: SlugService, useValue: mockSlugService },
+        { provide: 'UrlRepository', useValue: mockUrlRepository },
+        { provide: 'SlugService', useValue: mockSlugService },
       ],
     }).compile();
 
     useCase = module.get<CreateShortUrlUseCase>(CreateShortUrlUseCase);
-    urlRepository = module.get(UrlRepository);
-    slugService = module.get(SlugService);
+    urlRepository = module.get('UrlRepository');
+    slugService = module.get('SlugService');
   });
 
   it('should create a new short URL', async () => {

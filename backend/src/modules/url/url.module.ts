@@ -5,8 +5,6 @@ import { RedirectUrlUseCase } from './application/use-cases/redirect-url.use-cas
 import { GetUrlStatsUseCase } from './application/use-cases/get-url-stats.use-case';
 import { UrlRepositoryImpl } from './infrastructure/database/url.repository.impl';
 import { NanoidSlugService } from './infrastructure/services/nanoid-slug.service';
-import { UrlRepository } from './domain/repositories/url.repository.abstract';
-import { SlugService } from './domain/services/slug.service.abstract';
 
 @Module({
   controllers: [UrlController],
@@ -15,11 +13,11 @@ import { SlugService } from './domain/services/slug.service.abstract';
     RedirectUrlUseCase,
     GetUrlStatsUseCase,
     {
-      provide: UrlRepository,
+      provide: 'UrlRepository',
       useClass: UrlRepositoryImpl,
     },
     {
-      provide: SlugService,
+      provide: 'SlugService',
       useClass: NanoidSlugService,
     },
   ],

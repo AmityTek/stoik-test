@@ -1,9 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { UrlRepository } from '../../domain/repositories/url.repository.abstract';
+import { Injectable, NotFoundException, Inject } from '@nestjs/common';
+import type { UrlRepository } from '../../domain/repositories/url.repository.interface';
 
 @Injectable()
 export class RedirectUrlUseCase {
-  constructor(private readonly urlRepository: UrlRepository) {}
+  constructor(
+    @Inject('UrlRepository') private readonly urlRepository: UrlRepository,
+  ) {}
 
   async execute(slug: string): Promise<string> {
     const url = await this.urlRepository.findBySlug(slug);
